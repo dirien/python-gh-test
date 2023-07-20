@@ -2,5 +2,5 @@ name: python-gh-test
 runtime:
   name: python
   options:
-    virtualenv: venv
+    virtualenv: .venv
 description: A minimal Civo Python Pulumi program
