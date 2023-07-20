@@ -6,6 +6,3 @@ verify_ssl = true
 [packages]
 pulumi = ">= 3.55.0"
 pulumi-civo = "==2.3.4"
-
-[requires]
-python_version = "3.8.10"
