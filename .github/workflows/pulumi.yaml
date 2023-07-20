@@ -12,10 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install dependencies
-        uses: VaultVulp/action-pipenv@v2.0.1
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v1
         with:
-          command: install -d # Install all dependencies, including development ones
+          python-version: 3.11
+      - name: Install pipenv
+        run: pip install pipenv
+      - name: Install dependencies
+        run: pipenv install -d
       
       - uses: pulumi/actions@v4
         name: Install Pulumi CLI only
@@ -25,11 +29,8 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-
-      - name: Run Pulumi preview
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: run pulumi preview -s dev --logtostderr
+      - name: Install dependencies
+        run: pipenv run pulumi preview -s dev --logtostderr
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
