@@ -16,6 +16,15 @@ jobs:
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
           command: install -d # Install all dependencies, including development ones
+      
+      - uses: pulumi/actions@v4
+        name: Install Pulumi CLI only
+        with:
+          stack-name: dev
+          comment-on-pr: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
       - name: Run Pulumi preview
         uses: VaultVulp/action-pipenv@v2.0.1
